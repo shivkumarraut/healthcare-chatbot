@@ -1,0 +1,230 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi", "Hey", "Hello", "Good day", "Howdy", "Hi there",
+        "How are you", "Is anyone there?", "Hola", "Greetings",
+        "Good morning", "Good evening", "Good afternoon", "What's up"
+      ],
+      "responses": [
+        "Hello! I'm MediBot, your healthcare assistant. How can I help you today?",
+        "Hi there! Welcome to MediBot. I can help with drug info, blood pressure, hospitals, and pharmacies.",
+        "Hey! Great to see you. What can I assist you with today?"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye", "See you later", "Goodbye", "Nice chatting", "Till next time",
+        "Take care", "See you", "Catch you later", "I'm leaving", "Quit", "Exit"
+      ],
+      "responses": [
+        "Goodbye! Stay healthy!",
+        "Take care! Come back if you need anything.",
+        "Bye! Wishing you good health!"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks", "Thank you", "That's helpful", "Awesome thanks",
+        "Thanks for helping", "Much appreciated", "Great help", "You're helpful",
+        "Cheers", "That helped a lot", "Perfect thanks"
+      ],
+      "responses": [
+        "Happy to help! Is there anything else you need?",
+        "Anytime! Your health is my priority.",
+        "My pleasure! Let me know if you need more help."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "options",
+      "patterns": [
+        "How can you help me?", "What can you do?", "What help do you provide?",
+        "What are your features?", "What support is offered?", "Tell me what you can do",
+        "What do you offer?", "Show me your capabilities", "Help", "Menu", "Options"
+      ],
+      "responses": [
+        "I can help you with: \n• Adverse drug reaction information\n• Blood pressure tracking\n• Hospital search\n• Pharmacy search\n• General health tips\n\nWhat would you like to explore?",
+        "Here's what I can do:\n• Drug adverse reaction info\n• Blood pressure data management\n• Find nearby hospitals\n• Locate pharmacies\n\nJust ask!"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "adverse_drug",
+      "patterns": [
+        "How to check adverse drug reaction?", "Open adverse drugs module",
+        "Give me a list of drugs causing adverse behavior",
+        "List drugs suitable for patients with adverse reaction",
+        "Which drugs don't have adverse reactions?",
+        "Drug side effects", "Medicine side effects", "Drug reactions",
+        "Harmful drug combinations", "Drug allergy information",
+        "What are drug adverse effects?", "Check medicine reaction",
+        "Drug interaction", "Medication side effects"
+      ],
+      "responses": [
+        "Navigating to Adverse Drug Reaction module. Here you can check drug interactions and side effects.",
+        "Opening the adverse drug reaction database. Always consult your doctor before changing medications."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "blood_pressure",
+      "patterns": [
+        "Open blood pressure module", "Blood pressure data entry",
+        "I want to log blood pressure results", "Blood pressure data management",
+        "Track my blood pressure", "Add blood pressure reading",
+        "Record BP", "Log BP data", "Enter BP results",
+        "Blood pressure monitoring", "BP tracking", "Manage blood pressure data"
+      ],
+      "responses": [
+        "Navigating to Blood Pressure module. You can log and track your readings here.",
+        "Opening Blood Pressure tracker. Regular monitoring helps manage hypertension effectively."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "blood_pressure_search",
+      "patterns": [
+        "Search blood pressure results", "Blood pressure history",
+        "Load patient blood pressure result", "Show blood pressure results",
+        "Find blood pressure results by ID", "BP history for patient",
+        "Patient BP records", "Check BP history", "View blood pressure log"
+      ],
+      "responses": [
+        "Please provide the Patient ID to fetch blood pressure records.",
+        "Sure! What is the Patient ID you'd like to search?"
+      ],
+      "context": ["search_blood_pressure_by_patient_id"]
+    },
+    {
+      "tag": "search_blood_pressure_by_patient_id",
+      "patterns": [],
+      "responses": [
+        "Loading blood pressure records for the patient. Please wait..."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "pharmacy_search",
+      "patterns": [
+        "Find me a pharmacy", "Find pharmacy", "List pharmacies nearby",
+        "Locate pharmacy", "Search pharmacy", "Where is the nearest pharmacy?",
+        "Pharmacy near me", "Chemist shop near me", "Medicine store nearby",
+        "Drugstore location", "Find a chemist"
+      ],
+      "responses": [
+        "Please provide the pharmacy name or area to search.",
+        "Sure! What pharmacy are you looking for?"
+      ],
+      "context": ["search_pharmacy_by_name"]
+    },
+    {
+      "tag": "search_pharmacy_by_name",
+      "patterns": [],
+      "responses": [
+        "Loading pharmacy details. Please wait..."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "hospital_search",
+      "patterns": [
+        "Lookup for hospital", "Search hospital", "I want to find a hospital",
+        "Hospital near me", "Find hospital", "Nearest hospital",
+        "Emergency hospital", "Looking for hospital", "Hospital search",
+        "Which hospital should I go to?", "Find a clinic", "Medical centre near me"
+      ],
+      "responses": [
+        "Please provide the hospital name or location to search.",
+        "Sure! What hospital or area are you looking for?"
+      ],
+      "context": ["search_hospital_by_params"]
+    },
+    {
+      "tag": "search_hospital_by_params",
+      "patterns": [],
+      "responses": [
+        "Please provide the hospital type (e.g. General, Specialist, Emergency)."
+      ],
+      "context": ["search_hospital_by_type"]
+    },
+    {
+      "tag": "search_hospital_by_type",
+      "patterns": [],
+      "responses": [
+        "Loading hospital details. Please wait..."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "health_tips",
+      "patterns": [
+        "Give me a health tip", "Health advice", "How to stay healthy?",
+        "Tips for good health", "Daily health tips", "Healthy lifestyle tips",
+        "How to improve my health?", "Wellness tips", "Fitness advice",
+        "How to be fit?", "Healthy habits"
+      ],
+      "responses": [
+        "Here are some daily health tips:\n• Drink at least 8 glasses of water a day\n• Exercise for 30 minutes daily\n• Sleep 7-8 hours every night\n• Eat a balanced diet rich in fruits and vegetables\n• Avoid smoking and limit alcohol",
+        "Stay healthy with these habits:\n• Regular health checkups\n• Manage stress through meditation\n• Stay physically active\n• Maintain a healthy weight\n• Stay socially connected"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "emergency",
+      "patterns": [
+        "Emergency", "Help me it's urgent", "Medical emergency",
+        "I need immediate help", "Call ambulance", "Heart attack",
+        "Someone fainted", "Accident", "Critical condition", "Urgent medical help"
+      ],
+      "responses": [
+        "🚨 This sounds like an emergency! Please call 112 (India) or your local emergency number immediately. Do not delay.",
+        "🚨 For medical emergencies, call 108 (ambulance in India) right away. Every second counts!"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "symptoms",
+      "patterns": [
+        "I have a headache", "I feel dizzy", "I have fever", "My chest hurts",
+        "I feel nauseous", "I have body pain", "I'm feeling weak",
+        "I have a cold", "I'm coughing", "I feel breathless",
+        "What are symptoms of diabetes?", "Symptoms of hypertension",
+        "Signs of heart disease", "I feel unwell"
+      ],
+      "responses": [
+        "I'm sorry to hear you're not feeling well. Please consult a doctor for proper diagnosis. I can help you find a nearby hospital or pharmacy.",
+        "These symptoms should be evaluated by a healthcare professional. Would you like me to help you find a hospital nearby?"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "appointment",
+      "patterns": [
+        "Book an appointment", "Schedule a doctor visit", "I want to see a doctor",
+        "Doctor appointment", "Book doctor", "Consult a doctor",
+        "How to get an appointment?", "Medical appointment", "See a specialist"
+      ],
+      "responses": [
+        "To book a doctor appointment, I can help you find the right hospital. Would you like to search for hospitals nearby?",
+        "I can help you locate a hospital or clinic. Shall I search for one near you?"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "noanswer",
+      "patterns": [],
+      "responses": [
+        "I'm sorry, I didn't quite understand that. Could you rephrase?",
+        "Hmm, I'm not sure about that. Try asking about drugs, blood pressure, hospitals, or pharmacies.",
+        "I didn't get that. Type 'help' to see what I can assist with."
+      ],
+      "context": [""]
+    }
+  ]
+}
