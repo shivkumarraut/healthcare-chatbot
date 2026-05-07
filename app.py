@@ -4,12 +4,10 @@ import pickle
 import numpy as np
 import json
 import random
-
-from keras.models import load_model
+from sklearn.neural_network import MLPClassifier
 from flask import Flask, render_template, request
 from flask_cors import CORS
 
-# Simple tokenizer - no NLTK dependency needed
 def simple_tokenize(text):
     return re.findall(r"[a-zA-Z']+", text.lower())
 
@@ -19,16 +17,15 @@ def lemmatize_simple(word):
             return word[:-len(suffix)]
     return word
 
-# Load model and data
-model = load_model('model.h5')
+# Load data
 intents = json.loads(open('data.json').read())
 words = pickle.load(open('texts.pkl', 'rb'))
 classes = pickle.load(open('labels.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 
 app = Flask(__name__, template_folder='Templates')
 app.static_folder = 'static'
 CORS(app)
-
 
 def bow(sentence):
     sentence_words = [lemmatize_simple(w) for w in simple_tokenize(sentence)]
@@ -39,15 +36,13 @@ def bow(sentence):
                 bag[i] = 1
     return np.array(bag)
 
-
 def predict_class(sentence):
-    p = bow(sentence)
-    res = model.predict(np.array([p]), verbose=0)[0]
+    p = bow(sentence).reshape(1, -1)
+    probs = model.predict_proba(p)[0]
     ERROR_THRESHOLD = 0.25
-    results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
+    results = [[i, r] for i, r in enumerate(probs) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
-    return [{"intent": classes[r[0]], "probability": str(r[1])} for r in results]
-
+    return [{"intent": classes[i], "probability": str(r)} for i, r in results]
 
 def get_response(ints):
     if not ints:
@@ -62,7 +57,6 @@ def get_response(ints):
             return random.choice(i['responses'])
     return "I didn't get that. Please try again."
 
-
 def chatbot_response(msg):
     try:
         ints = predict_class(msg)
@@ -70,11 +64,9 @@ def chatbot_response(msg):
     except Exception:
         return "Sorry, something went wrong. Please try again."
 
-
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 @app.route("/get")
 def get_bot_response():
@@ -82,7 +74,6 @@ def get_bot_response():
     if not user_text.strip():
         return "Please enter a message."
     return chatbot_response(user_text)
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
